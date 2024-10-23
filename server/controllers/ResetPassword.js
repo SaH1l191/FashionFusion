@@ -57,10 +57,9 @@ export const resetPasswordToken = async (req, res) => {
 // Reset Password handler
 export const resetPassword = async (req, res) => {
   try {
-    // Data fetch
+    
     const { password, confirmPassword, token } = req.body;
 
-    // Validation
     if (password !== confirmPassword) {
       return res.status(400).json({
         success: false,
@@ -68,7 +67,6 @@ export const resetPassword = async (req, res) => {
       });
     }
 
-    // Get user details from database using token
     const userDetails = await User.findOne({ token });
     
     // If no entry, token is invalid
@@ -79,28 +77,22 @@ export const resetPassword = async (req, res) => {
       });
     }
 
-    // Token expiration check
     if (userDetails.resetPasswordExpires < Date.now()) {
       return res.status(410).json({
         success: false,
         message: "Token is expired, please regenerate your token",
       });
     }
-
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Update password
     await User.findOneAndUpdate(
       { token },
       { password: hashedPassword },
       { new: true }
     );
 
-    // Send confirmation email
     await mailSender(userDetails.email, "Password Reset Confirmation", passwordUpdated(userDetails.email, userDetails.firstName));
 
-    // Return response
     return res.status(200).json({
       success: true,
       message: "Password reset successfully",

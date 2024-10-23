@@ -7,11 +7,6 @@ const Dashboard = () => {
 
 
 
-//   const {data : authUser} = useQuery({queryKey:["authUser"]})
-
-// if(authUser){
-//   return <Navigate to="/dashboard/view" />
-// }
   return (
     <div className='flex w-full min-h-screen mt-20'>
       <Sidebarr/>

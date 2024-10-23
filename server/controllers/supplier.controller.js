@@ -12,7 +12,7 @@ export const createSupplier = async (req, res) => {
         }
 
         const newSupplier = new Supplier({
-            adminId: req.user._id, // Associate with the logged-in user
+            adminId: req.user._id, 
             name,
             contactInfo,
             address,
@@ -31,7 +31,6 @@ export const getAllSuppliers = async (req, res) => {
     try {
         const suppliers = await Supplier.find({ adminId: req.user._id }).populate('productsSupplied');
         
-        // Calculate totalTransactions for each supplier
         const suppliersWithTransactions = await Promise.all(suppliers.map(async (supplier) => {
             const totalTransactions = await Transaction.aggregate([
                 { $match: { product: { $in: supplier.productsSupplied }, adminId: req.user._id } },
@@ -60,7 +59,6 @@ export const getSupplierById = async (req, res) => {
             return res.status(404).json({ message: "Supplier not found" });
         }
 
-        // Calculate totalTransactions for the supplier
         const totalTransactions = await Transaction.aggregate([
             { $match: { product: { $in: supplier.productsSupplied }, adminId: req.user._id } },
             { $group: { _id: null, total: { $sum: "$amount" } } }
@@ -93,7 +91,6 @@ export const updateSupplier = async (req, res) => {
             return res.status(404).json({ message: "Supplier not found" });
         }
 
-        // Calculate totalTransactions for the updated supplier
         const totalTransactions = await Transaction.aggregate([
             { $match: { product: { $in: updatedSupplier.productsSupplied }, adminId: req.user._id } },
             { $group: { _id: null, total: { $sum: "$amount" } } }
@@ -120,11 +117,8 @@ export const deleteSupplier = async (req, res) => {
             return res.status(404).json({ message: "Supplier not found" });
         }
 
-        // Remove references to this supplier from products
         await Product.updateMany({ supplier: req.params.id }, { $unset: { supplier: "" } });
 
-        // Optionally, you might want to handle related transactions here
-        // Note: We're not deleting transactions as they serve as historical records
 
         res.status(200).json({ message: "Supplier deleted successfully" });
     } catch (error) {

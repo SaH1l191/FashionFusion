@@ -16,7 +16,6 @@ export const createTransaction = async (req, res) => {
             return res.status(404).json({ message: "Product not found" });
         }
 
-        // Check if there's enough stock for a sale transaction
         if (transactionType === 'sale' && productDoc.stockQuantity < quantity) {
             return res.status(400).json({ message: "Not enough stock for this sale" });
         }
@@ -43,7 +42,6 @@ export const createTransaction = async (req, res) => {
 
         await newTransaction.save();
 
-        // Update the product stock quantity based on the transaction type
         if (transactionType === 'sale') {
             await Product.findByIdAndUpdate(product, { $inc: { stockQuantity: -quantity } });
         } else if (transactionType === 'purchase') {
@@ -66,7 +64,7 @@ export const getAllTransactions = async (req, res) => {
                 path: 'supplier',
                 select: 'name'
             })
-            .sort({ date: -1 }) // Sort by date in descending order
+            .sort({ date: -1 }) 
         res.status(200).json(transactions);
     } catch (error) {
         console.error("Error fetching transactions:", error);
@@ -112,7 +110,7 @@ export const getProductSummary = async (req, res) => {
                     transactionType: "$lastTransactionType"
                 }
             },
-            { $sort: { lastTransactionDate: -1 } } // Sort by lastTransactionDate in descending order
+            { $sort: { lastTransactionDate: -1 } } 
         ]);
 
         res.status(200).json(productSummary);
@@ -192,7 +190,6 @@ export const updateTransaction = async (req, res) => {
             return res.status(404).json({ message: "Transaction not found" });
         }
 
-        // Update the product stock quantity based on the new transaction type
         if (transactionType === 'sale') {
             await Product.findByIdAndUpdate(product, { $inc: { stockQuantity: -quantity } });
         } else if (transactionType === 'purchase') {
@@ -215,7 +212,6 @@ export const deleteTransaction = async (req, res) => {
             return res.status(404).json({ message: "Transaction not found" });
         }
 
-        // Revert the product stock quantity based on the deleted transaction type
         if (deletedTransaction.transactionType === 'sale') {
             await Product.findByIdAndUpdate(deletedTransaction.product, { $inc: { stockQuantity: deletedTransaction.quantity } });
         } else if (deletedTransaction.transactionType === 'purchase') {

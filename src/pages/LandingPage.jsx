@@ -29,7 +29,6 @@ const LandingPage = () => {
         <div className='flex items-center justify-between gap-10'>
           <div className='w-[50%]' data-aos="fade-right">
             <div className='p-4 space-y-6'>
-              {/* Updated Fashion Fusion text to be a display text logo */}
               <h1 className='text-6xl font-bold text-transparent bg-gradient-to-r from-slate-800 to-indigo-600 bg-clip-text'>Fashion Fusion</h1>
               <div className='flex flex-col text-5xl font-bold'>
                 <p className='text-[#030303] w-3/4'>The best way

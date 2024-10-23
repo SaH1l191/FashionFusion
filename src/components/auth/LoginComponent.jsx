@@ -1,5 +1,3 @@
-//todo add gogole auth vaidation at the end of the project 
-
 
 import { Link, useNavigate } from "react-router-dom" 
 import { Button } from "../ui/button"
@@ -46,20 +44,7 @@ export default function LoginComponent() {
     }
   })
 
-  // const loginMutation = useMutation({
-  //   mutationFn: async (formData) => {
-  //     const response = await axios.post('/auth/login', formData);
-  //     return response.data;
-  //   },
-  //   
-  //   
-  // });
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   loginMutation.mutate(formData);
-  // };
-
+  
 
 
 
@@ -110,9 +95,6 @@ export default function LoginComponent() {
             <Button type="submit" className="w-full">
               Login
             </Button>
-            {/* <Button variant="outline" className="w-full">
-              Login with Google
-            </Button> */}
           </form>
           <div className="mt-4 text-sm text-center">
             Don&apos;t have an account?{" "}
@@ -127,7 +109,7 @@ export default function LoginComponent() {
           src={scenario}
           alt="Image"
         width={2}
-        //   height="250px"
+       
           className="h-full w-full object-fit dark:brightness-[0.2] dark:grayscale rounded-e-3xl "
         />
       </div>
