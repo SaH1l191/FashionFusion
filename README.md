@@ -1,4 +1,5 @@
-![image](https://github.com/user-attachments/assets/f99ad570-6c5f-45aa-8ac6-db7a48068a42)
+![image](https://github.com/user-attachments/assets/c9834afc-7a4a-4b15-bfea-b89870ca2d9d)
+
 
 # 👗 Fashion Fusion - A Fashion Store Management Platform 🛍️
 
