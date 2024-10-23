@@ -4,6 +4,7 @@
 
 Fashion Fusion is a MERN stack-based platform designed to empower fashion store owners by providing an all-in-one solution for managing inventory, staying updated with fashion news, and utilizing AI for news summarization and demand forecasting. The platform also integrates secure payment subscription services using Razorpay.
 
+![Uploading image.png…]()
 
 
 Fashion Fusion enables store owners to:
