@@ -30,15 +30,15 @@ Demand forecasting works better on large sample data of entries.
 - **Tailwind CSS**: Utility-first CSS framework for sleek and responsive UI design.
 - **TanStack Query (React Query)**: Efficient data fetching and state management for the front-end.
 - **Razorpay**: Secure payment gateway for subscription management.
-- **AI Integration**: Utilized AI models for summarizing news and forecasting demand.
-- **Django: Python-based web framework that can be used to handle the server-side logic for AI integration and additional features.
+- **Django**: Python-based web framework that can be used to handle the server-side logic for AI integration and additional features.
 ---
 
 ## 🔑 Key Features
 
 - **Inventory Management**: Admins can add, edit, and delete products and track inventory levels.
-- **Fashion News Updates**: Stay up to date with fashion news powered by AI news summarization.
-- **AI Forecasting**: AI models are integrated to predict demand for certain products.
+- **Fashion News Updates**: Stay up to date with fashion news powered by News API and ChatGroq.
+- **Demand Forecasting**: ARIMA is integrated to predict demand for inventory products.
+- **Trend Analysis**: Trend Analysis using Google Trends API
 - **Subscription Payment System**: Integrated with Razorpay for secure and efficient payment processing.
 - **User-Friendly UI**: Built with Tailwind CSS for a sleek, mobile-responsive user interface.
 
