@@ -18,8 +18,8 @@ class NewsSummary(APIView):
         fashion_news = newsapi.get_everything(
             q='fashion OR clothing OR apparel OR trends OR style OR runway OR designer',
             domains='vogue.com,harpersbazaar.com,elle.com,wwd.com,fashionista.com',
-            from_param='2024-10-01',  # Adjusted to a more recent start date
-            to='2024-11-30',  # End date remains the same
+            from_param='2024-10-01',  
+            to='2024-11-30',  
             language='en',
             sort_by='popularity',
             page=1
