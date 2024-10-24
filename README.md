@@ -11,8 +11,9 @@ Fashion Fusion is a MERN stack-based platform designed to empower fashion store 
 
 Fashion Fusion enables store owners to:
 - Manage inventory with ease.
-- Stay updated with the latest fashion trends and news.
-- Leverage AI to summarize news articles and forecast future product demand.
+- Trend analysis using google treds API.
+- Leverage ARIMA model to forecast future product demand.
+- User llama-3.1-70b-versatile LLM to generate news summaries of Web articels and blogs.
 - Securely manage subscription payments through Razorpay integration.
 
 ⚠️ INFO 
