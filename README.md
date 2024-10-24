@@ -19,7 +19,8 @@ Fashion Fusion enables store owners to:
 ⚠️ INFO 
 Demand forecasting works better on large sample data of entries.
 
-<div style="position:relative; width:100%; height:0px; padding-bottom:56.250%"><iframe allow="fullscreen" allowfullscreen height="100%" src="https://streamable.com/e/51exy3" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;"></iframe></div>
+[![Watch the Video](https://streamable.com/e/51exy3)](https://streamable.com/e/51exy3)
+
 
 ## 🛠️ Technologies Used
 
