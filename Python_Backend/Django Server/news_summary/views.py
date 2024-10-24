@@ -7,11 +7,11 @@ from rest_framework import status
 
 class NewsSummary(APIView):
     def post(self, request):
-        newsapi = NewsApiClient(api_key='99a014355a6946f0bf1d1c76541267ab')
+        newsapi = NewsApiClient(api_key='')
         
         llm = ChatGroq(
             temperature=0,
-            groq_api_key='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',
+            groq_api_key='',
             model_name='llama-3.1-70b-versatile'
         )
 
