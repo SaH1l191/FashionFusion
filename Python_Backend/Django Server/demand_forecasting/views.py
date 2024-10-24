@@ -43,26 +43,20 @@ class ProductSummaryView(View):
                 'message': f"Failed to fetch data. Status code: {product_summary_response.status_code}"
             }, status=500)
 
-        # Parse product summary data
         product_summary_data = product_summary_response.json()
 
         # Step 2: Prepare the data
-        # Convert data to a pandas DataFrame
         df = pd.DataFrame(product_summary_data)
 
-        # Filter sales transactions only
         df_sales = df[df['transactionType'] == 'sale']
 
-        # Convert the 'date' field to datetime
         df_sales['date'] = pd.to_datetime(df_sales['date'])
 
-        # Aggregate sales by product and day
         df_grouped = df_sales.groupby([df_sales['date'].dt.date, 'productName']).agg({
             'quantity': 'sum',
             'amount': 'sum'
         }).reset_index()
 
-        # Convert dates back to strings for JSON serialization
         df_grouped['date'] = df_grouped['date'].astype(str)
 
         # Step 3: Save the prepared data to a JSON file
@@ -73,7 +67,6 @@ class ProductSummaryView(View):
             with open(file_path, 'w') as json_file:
                 json.dump(product_summary_prepared, json_file, indent=4)
             
-            # Return a success message to frontend
             return JsonResponse({
                 'success': True,
                 'message': f"Data successfully aggregated and saved to {file_path}"
@@ -98,36 +91,28 @@ class WeeklyForecastView(View):
                 'message': f"Pre-processed data not found at {file_path}"
             }, status=500)
 
-        # Step 1: Load data into a DataFrame
+
         df = pd.DataFrame(product_summary_data)
 
-        # Convert 'date' column back to datetime
         df['date'] = pd.to_datetime(df['date'])
 
-        # Step 2: Resample data to weekly frequency, summing up sales for each product
         df_weekly = df.groupby([pd.Grouper(key='date', freq='W'), 'productName']).agg({
             'quantity': 'sum',
             'amount': 'sum'
         }).reset_index()
 
-        # Step 3: Apply ARIMA model for each product
+        #ARIMA model for each product
         forecasts = {}
 
         for product in df_weekly['productName'].unique():
-            # Filter data for the current product
             product_data = df_weekly[df_weekly['productName'] == product].set_index('date')
 
-            # We focus on 'quantity' as the target for forecasting
             product_sales = product_data['quantity']
 
-            # Fit ARIMA model
-            model = ARIMA(product_sales, order=(5, 1, 0))  # Example ARIMA(5,1,0) model
-            model_fit = model.fit()
-
-            # Forecast for the next 4 weeks
+            model = ARIMA(product_sales, order=(5, 1, 0))
+            model_fit = model.fit()s
             forecast = model_fit.forecast(steps=4)
 
-            # Convert forecast to a dictionary with dates and quantities
             forecast_dates = pd.date_range(start=product_sales.index[-1], periods=5, freq='W')[1:]
             forecasts[product] = {
                 'dates': forecast_dates.strftime('%Y-%m-%d').tolist(),

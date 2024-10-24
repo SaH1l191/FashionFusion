@@ -7,19 +7,19 @@ from rest_framework import status
 
 class NewsSummary(APIView):
     def post(self, request):
-        newsapi = NewsApiClient(api_key='99a014355a6946f0bf1d1c76541267ab')
+        newsapi = NewsApiClient(api_key='')
         
         llm = ChatGroq(
             temperature=0,
-            groq_api_key='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',
+            groq_api_key='',
             model_name='llama-3.1-70b-versatile'
         )
 
         fashion_news = newsapi.get_everything(
             q='fashion OR clothing OR apparel OR trends OR style OR runway OR designer',
             domains='vogue.com,harpersbazaar.com,elle.com,wwd.com,fashionista.com',
-            from_param='2024-10-01',  # Adjusted to a more recent start date
-            to='2024-11-30',  # End date remains the same
+            from_param='2024-10-01',  
+            to='2024-11-30',  
             language='en',
             sort_by='popularity',
             page=1
