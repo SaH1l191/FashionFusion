@@ -25,7 +25,7 @@ const TrendNews = () => {
       'domains=vogue.com,fashionista.com,elle.com,wwd.com&' +
       'sortBy=popularity&' +
       'language=en&' +
-      'apiKey=9f9aa0cd187d4cd8b4fb08a379ad3805'
+      'apiKey=' // new api key here
     );
 
     // Filter articles based on age restriction
